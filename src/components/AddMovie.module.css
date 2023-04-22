@@ -1,0 +1,29 @@
+.control {
+  margin: 1rem 0;
+}
+
+.control label {
+  display: block;
+  margin-bottom: 0.5rem;
+
+  font-weight: bold;
+  text-align: left;
+}
+
+.control input,
+.control textarea {
+  display: block;
+  width: 100%;
+  padding: 0.2rem;
+
+  font: inherit;
+
+  border-radius: 12px;
+  border: 1px solid #cccccc;
+}
+
+.control input:focus,
+.control textarea:focus {
+  outline: none;
+  border-color: #230052;
+}
