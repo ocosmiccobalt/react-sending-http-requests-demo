@@ -8,6 +8,7 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [recentlyAdded, setRecentlyAdded] = useState(0);
 
   const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
@@ -42,7 +43,7 @@ const App = () => {
 
   useEffect(() => {
     fetchMoviesHandler();
-  }, [fetchMoviesHandler]);
+  }, [fetchMoviesHandler, recentlyAdded]);
 
   async function addMovieHandler(movie) {
     const response = await fetch('https://react-http-23-default-rtdb.firebaseio.com/movies.json', {
@@ -54,6 +55,7 @@ const App = () => {
     });
     const data = await response.json();
     console.log(data);
+    setRecentlyAdded((prevAdded) => ++prevAdded);
   }
 
   let content = <p>Found no movies.</p>;
