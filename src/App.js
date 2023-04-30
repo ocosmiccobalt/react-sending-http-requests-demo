@@ -8,7 +8,7 @@ const App = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [recentlyAdded, setRecentlyAdded] = useState(0);
+  // const [recentlyAdded, setRecentlyAdded] = useState(0);
 
   const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
@@ -43,7 +43,8 @@ const App = () => {
 
   useEffect(() => {
     fetchMoviesHandler();
-  }, [fetchMoviesHandler, recentlyAdded]);
+  }, [fetchMoviesHandler]);
+  // }, [fetchMoviesHandler, recentlyAdded]);
 
   async function addMovieHandler(movie) {
     setError(null);
@@ -62,7 +63,14 @@ const App = () => {
 
       const data = await response.json();
       console.log(data);
-      setRecentlyAdded((prevAdded) => ++prevAdded);
+      // setRecentlyAdded((prevAdded) => ++prevAdded);
+
+      // instead of calling fetchMoviesHandler every time when a movie is added:
+      const addedMovie = {
+        id: data.name, // firebase-specific => "name" contains generated id
+        ...movie
+      };
+      setMovies((prevMovies) => prevMovies.concat(addedMovie));
     } catch (error) {
       setError(error.message);
     }
